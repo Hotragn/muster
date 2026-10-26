@@ -136,7 +136,7 @@ Node's `http` module and nothing else. It resolves `/app` → `app.html` (a page
 
 | Layer | Tool | What it proves |
 |---|---|---|
-| Unit | `node --test test/` (15 tests) | Date math, run-out rules, set-aside rules, short-fill landing, early refill, grouping within the window, closed days never used, 28-day weekday stability, copay proration, steady-state monthly count, validation. |
+| Unit | `node --test test/*.test.mjs` (15 tests) | Date math, run-out rules, set-aside rules, short-fill landing, early refill, grouping within the window, closed days never used, 28-day weekday stability, copay proration, steady-state monthly count, validation. |
 | Design | `scripts/contrast.mjs` | 34 colour pairs meet WCAG AA in light and dark. |
 | Static | ESLint (recommended rules) | No unused or undefined identifiers, browser/Node globals separated. |
 | End to end | `scripts/golden-path.mjs` (headless Chrome over the DevTools Protocol) | The demo flow ×N plus edge cases: empty state, invalid input, one bottle, all days closed, 375 px without horizontal scroll on all pages, 404, images load, zero console errors. |
