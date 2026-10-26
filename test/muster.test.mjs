@@ -57,11 +57,13 @@ test('plan aligns every syncable bottle to the same repeating day', () => {
   assert.ok(plan.after.length < plan.before.length, `after ${plan.after.length} < before ${plan.before.length}`);
 });
 
-test('never picks a closed weekday as the anchor', () => {
-  const meds = [med({ name: 'a', lastFill: '2026-10-08' }), med({ name: 'b', lastFill: '2026-10-15' })];
+test('no trip, before or after, ever lands on a closed weekday', () => {
+  const meds = [med({ name: 'a', lastFill: '2026-10-08' }), med({ name: 'b', lastFill: '2026-10-15' }), med({ name: 'c', lastFill: '2026-10-25' })];
   for (const cycle of [28, 30]) {
     const plan = planSync(meds, { today: T, cycle, closedWeekdays: [0, 6] });
     assert.ok(![0, 6].includes(weekday(plan.anchor)));
+    for (const d of [...plan.before, ...plan.after, plan.syncTrip]) assert.ok(![0, 6].includes(weekday(d)), `${fromDay(d)} is closed`);
+    for (const f of plan.fills) assert.ok(f.pickup <= f.date || f.action !== 'short');
   }
 });
 

@@ -1,0 +1,69 @@
+/* Shared base for every Muster page. Tokens only. */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+}
+img, svg { display: block; max-width: 100%; }
+h1, h2, h3 { line-height: var(--lh-snug); margin: 0; font-weight: var(--fw-bold); }
+p { margin: 0; }
+a { color: var(--c-amber); text-underline-offset: 0.18em; }
+a:hover { color: var(--c-amber-strong); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: var(--r-sm); }
+.mono { font-family: var(--font-mono); }
+.muted { color: var(--text-muted); }
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; margin: -1px; padding: 0; border: 0;
+}
+.skip-link { position: absolute; left: var(--s-4); top: -100px; background: var(--surface); padding: var(--s-2) var(--s-4); z-index: 10; }
+.skip-link:focus { top: var(--s-2); }
+
+/* Lockup: symbol + wordmark */
+.lockup { display: inline-flex; align-items: center; gap: var(--s-2); text-decoration: none; color: var(--text); }
+.lockup img { width: 32px; height: 32px; }
+.lockup span { font-weight: var(--fw-bold); font-size: var(--fs-lg); letter-spacing: -0.01em; }
+
+/* Buttons */
+.btn {
+  appearance: none; font: inherit; font-weight: var(--fw-bold); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  min-height: 44px; padding: var(--s-2) var(--s-5);
+  border-radius: var(--r-md); border: 2px solid transparent;
+  transition: background-color var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out);
+  text-decoration: none;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--c-amber); color: var(--c-on-amber); }
+.btn-primary:hover { background: var(--c-amber-strong); color: var(--c-on-amber); }
+.btn-secondary { background: var(--surface); color: var(--text); border-color: var(--control-border); }
+.btn-secondary:hover { background: var(--c-amber-wash); color: var(--text); }
+.btn-quiet { background: transparent; color: var(--c-amber); padding-inline: var(--s-3); text-decoration: underline; text-underline-offset: 0.18em; }
+.btn-quiet:hover { color: var(--c-amber-strong); }
+.btn-danger { background: transparent; color: var(--c-danger); border-color: currentColor; }
+.btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+
+/* The muster line: the signature element as a reusable divider */
+.muster-rule { display: flex; align-items: center; gap: 6px; }
+.muster-rule::before {
+  content: ""; width: var(--dot); height: var(--dot); border-radius: 50%;
+  background: var(--c-amber);
+  box-shadow: 0 calc(var(--dot) + 6px) 0 var(--c-amber), 0 calc(-1 * (var(--dot) + 6px)) 0 var(--c-amber);
+}
+.muster-rule::after { content: ""; width: var(--muster-line); align-self: stretch; min-height: 44px; background: var(--c-amber); border-radius: 2px; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: var(--s-1);
+  font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: var(--fw-mono-strong);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 2px var(--s-2); border-radius: var(--r-sm);
+  background: var(--c-ink-wash); color: var(--c-ink);
+}
+.badge-warn { background: var(--c-warn-wash); color: var(--c-warn); }
+.badge-amber { background: var(--c-amber-wash); color: var(--c-amber-strong); }

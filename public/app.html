@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Muster planner</title>
+  <meta name="description" content="Line up every prescription on one pickup day, with the short fills to ask your pharmacist for.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#plan">Skip to the plan</a>
+
+  <header class="topbar">
+    <a class="lockup" href="./" aria-label="Muster home"><img src="brand/symbol.svg" alt=""><span>muster</span></a>
+    <p class="topbar-note"><span class="badge" id="example-badge" hidden>Example (fictional)</span>
+      <span class="muted">Everything stays in this browser. No account, nothing sent.</span></p>
+  </header>
+
+  <main class="layout">
+    <!-- Left: the counter with the bottles on it -->
+    <section class="counter" aria-labelledby="bottles-h">
+      <div class="counter-head">
+        <h1 id="bottles-h">The bottles</h1>
+        <label class="whose">
+          <span class="visually-hidden">Whose bottles are these?</span>
+          <input id="whose" type="text" maxlength="40" placeholder="Whose? e.g. Dad" autocomplete="off">
+        </label>
+      </div>
+      <ol id="bottle-list" class="bottle-list" aria-live="polite"></ol>
+
+      <div id="empty" class="empty" hidden>
+        <div class="empty-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p>No bottles yet. Add the first one from the counter, or load the example to see how it works.</p>
+        <div class="row">
+          <button class="btn btn-primary" type="button" data-action="add">Add a bottle</button>
+          <button class="btn btn-secondary" type="button" data-action="example">Load example household</button>
+        </div>
+      </div>
+
+      <div class="counter-actions" id="counter-actions">
+        <button class="btn btn-secondary" type="button" data-action="add">Add a bottle</button>
+        <button class="btn btn-quiet" type="button" data-action="reset">Start over</button>
+      </div>
+    </section>
+
+    <!-- Right: the plan -->
+    <section class="plan" id="plan" aria-labelledby="plan-h" tabindex="-1">
+      <div class="plan-head">
+        <div>
+          <h2 id="plan-h"><span id="plan-title">Pickups, as they are now</span></h2>
+          <p class="muted" id="plan-sub">Each dot is a trip to the pharmacy for one bottle.</p>
+        </div>
+        <div class="trip-counter" aria-live="polite">
+          <span class="trip-label mono">Next 90 days</span>
+          <span class="trip-nums"><span id="trips-before" class="trip-before">0</span><span class="trip-arrow" id="trip-arrow" aria-hidden="true">→</span><span id="trips-after" class="trip-after"></span></span>
+          <span class="trip-unit" id="trip-unit">trips</span>
+        </div>
+      </div>
+
+      <div class="timeline" id="timeline" aria-describedby="plan-sub">
+        <div class="tl-axis" id="tl-axis" aria-hidden="true"></div>
+        <div class="tl-body" id="tl-body"></div>
+        <div class="tl-lines" id="tl-lines" aria-hidden="true"></div>
+      </div>
+      <p class="tl-legend muted" aria-hidden="true">
+        <span><i class="lg lg-fill"></i>Regular fill</span>
+        <span><i class="lg lg-short"></i>Short fill</span>
+        <span><i class="lg lg-aside"></i>Set aside</span>
+        <span><i class="lg lg-line"></i>Pickup day</span>
+      </p>
+
+      <div class="controls">
+        <fieldset class="seg">
+          <legend>Repeat every</legend>
+          <label><input type="radio" name="cycle" value="30" checked><span>30 days</span></label>
+          <label><input type="radio" name="cycle" value="28"><span>4 weeks (same weekday)</span></label>
+        </fieldset>
+        <fieldset class="seg">
+          <legend>Pharmacy closed</legend>
+          <label><input type="checkbox" name="closed" value="0" checked><span>Sun</span></label>
+          <label><input type="checkbox" name="closed" value="6"><span>Sat</span></label>
+        </fieldset>
+      </div>
+
+      <div class="cta-row">
+        <button class="btn btn-primary btn-big" id="lineup" type="button">Line them up</button>
+        <button class="btn btn-quiet" id="show-before" type="button" hidden>Show how it is now</button>
+        <p id="plan-msg" class="plan-msg" role="status"></p>
+      </div>
+
+      <div id="result" class="result" hidden>
+        <div class="result-head">
+          <h3 id="result-h"></h3>
+          <button class="btn btn-secondary" id="print" type="button">Print the pharmacist card</button>
+        </div>
+        <ol class="trips" id="trips"></ol>
+        <div class="aside" id="aside" hidden>
+          <h4>Set aside: ask your pharmacist</h4>
+          <ul id="aside-list"></ul>
+        </div>
+        <details class="working">
+          <summary>How Muster worked this out</summary>
+          <ul>
+            <li>Run-out day = fill date + days' supply (or today + pills on hand ÷ pills a day, if you counted).</li>
+            <li>It tries every possible pickup day in the next cycle, skipping days the pharmacy is closed, and keeps the one with the fewest trips in the next 90 days, then the fewest short-fill days.</li>
+            <li>A short fill covers the days from a bottle's run-out to the pickup day, so it lands exactly on it. Short fills due close together are collected on one trip, never after a bottle runs out and never more than a fifth of the supply early.</li>
+            <li>A bottle due just after the pickup day is refilled a few days early on it instead. Many plans allow that once about 80% of a supply is used.</li>
+            <li>Copay estimates use a daily rate: copay ÷ days' supply × days filled. Medicare Part D plans must charge a daily rate for short fills of tablets and capsules (42 CFR 423.153(b)(4)); other plans vary.</li>
+            <li>Doses never change. The pharmacist checks the plan against the pharmacy record.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottle editor -->
+  <dialog id="editor" class="editor" aria-labelledby="editor-h">
+    <form id="editor-form" method="dialog" novalidate>
+      <div class="editor-label">
+        <h2 id="editor-h">Add a bottle</h2>
+        <p class="muted">Copy it from the pharmacy label.</p>
+      </div>
+      <div class="field">
+        <label for="f-name">Medication and strength</label>
+        <input id="f-name" name="name" type="text" maxlength="60" placeholder="e.g. Lisinopril 10 mg" autocomplete="off" required>
+        <p class="err" id="e-name"></p>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-kind">Form</label>
+          <select id="f-kind" name="kind">
+            <option value="tablet">Tablet</option>
+            <option value="capsule">Capsule</option>
+            <option value="inhaler">Inhaler</option>
+            <option value="insulin">Insulin pen</option>
+            <option value="liquid">Liquid</option>
+            <option value="patch">Patch</option>
+            <option value="drops">Drops</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-perDay">How many a day</label>
+          <input id="f-perDay" name="perDay" type="number" min="0.25" max="24" step="0.25" inputmode="decimal" required>
+          <p class="err" id="e-perDay"></p>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-daysSupply">Days' supply</label>
+          <input id="f-daysSupply" name="daysSupply" type="number" min="1" max="120" step="1" inputmode="numeric" required>
+          <p class="hint">On the label, often 30 or 90.</p>
+          <p class="err" id="e-daysSupply"></p>
+        </div>
+        <div class="field">
+          <label for="f-lastFill">Filled on</label>
+          <input id="f-lastFill" name="lastFill" type="date" required>
+          <p class="err" id="e-lastFill"></p>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-onHand">Pills on hand <span class="muted">(optional)</span></label>
+          <input id="f-onHand" name="onHand" type="number" min="0" step="1" inputmode="numeric">
+          <p class="hint">If you count them, Muster uses the count instead of the fill date.</p>
+          <p class="err" id="e-onHand"></p>
+        </div>
+        <div class="field">
+          <label for="f-copay">Copay per fill <span class="muted">(optional)</span></label>
+          <input id="f-copay" name="copay" type="number" min="0" step="0.01" inputmode="decimal" placeholder="$">
+          <p class="err" id="e-copay"></p>
+        </div>
+      </div>
+      <label class="check">
+        <input id="f-controlled" name="controlled" type="checkbox">
+        <span>Controlled substance <span class="muted">(for example opioid pain medicine, ADHD medicine, sleep or anxiety medicine with a "C" on the label)</span></span>
+      </label>
+      <div class="editor-actions">
+        <button class="btn btn-danger" type="button" id="f-delete" hidden>Remove bottle</button>
+        <span class="spacer"></span>
+        <button class="btn btn-quiet" type="button" id="f-cancel">Cancel</button>
+        <button class="btn btn-primary" type="submit" id="f-save">Save bottle</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Printed card for the pharmacy counter (print only) -->
+  <section class="card" id="card" aria-hidden="true"></section>
+</body>
+</html>

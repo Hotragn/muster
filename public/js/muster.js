@@ -70,6 +70,14 @@ export function validateMed(med, today) {
 
 const mod = (a, n) => ((a % n) + n) % n;
 
+// Trips can't happen on a day the pharmacy is closed: go on the nearest open day before.
+export function openOnOrBefore(day, closed, floor) {
+  if (closed.length >= 7) return day;
+  let d = day;
+  while (closed.includes(weekday(d)) && d > floor) d--;
+  return d;
+}
+
 // Pickups if nothing changes: each bottle is refilled the day it runs out.
 export function pickupsAsIs(med, today, horizon) {
   const days = [];
@@ -86,7 +94,7 @@ export function stepFor(med, anchor, cycle, today) {
   const prevSync = nextSync - cycle;
   const earlyBy = due - prevSync;
   if (prevSync >= anchor && earlyBy <= Math.floor(med.daysSupply * EARLY_REFILL_SHARE)) {
-    return { action: 'early', date: prevSync, days: med.daysSupply, earlyBy, alignedOn: prevSync };
+    return { action: 'early', date: due, days: med.daysSupply, earlyBy, alignedOn: prevSync };
   }
   return { action: 'short', date: due, days: shortDays, alignedOn: nextSync };
 }
@@ -102,9 +110,12 @@ function pickupsAfter(step, med, today, horizon) {
 // Short fills can be collected a few days before the bottle runs out, so
 // several of them can share one trip. Greedy interval stabbing: reuse a day
 // already on the calendar if one fits, otherwise pick the latest allowed day.
-function groupShortPickups(steps, fixedDays, today) {
+function groupShortPickups(steps, fixedDays, today, shift) {
   const shorts = steps.filter((s) => s.action === 'short')
-    .map((s) => ({ s, lo: Math.max(today, s.date - earlyWindow(s.med)), hi: s.date }))
+    .map((s) => {
+      const hi = shift(s.date);
+      return { s, lo: Math.min(hi, Math.max(today, s.date - earlyWindow(s.med))), hi };
+    })
     .sort((a, b) => a.hi - b.hi);
   const chosen = [];
   for (const it of shorts) {
@@ -130,11 +141,13 @@ export function planSync(meds, opts = {}) {
     else syncable.push(med);
   }
 
-  const before = unique(meds.flatMap((m) => pickupsAsIs(m, today, horizon)));
+  const shift = (d) => openOnOrBefore(d, closed, today);
+  for (const s of setAside) s.pickups = s.pickups.map(shift);
+  const before = unique(meds.flatMap((m) => pickupsAsIs(m, today, horizon).map(shift)));
   const setAsidePickups = setAside.flatMap((s) => s.pickups);
 
   if (syncable.length < 2) {
-    return { ok: false, reason: 'too-few', today, cycle, horizon, before, setAside, syncable };
+    return { ok: false, reason: 'too-few', today, cycle, horizon, closed, before, setAside: setAside.map((s) => ({ medId: s.med.id, reason: s.reason, pickups: s.pickups })), syncable };
   }
 
   let best = null;
@@ -142,12 +155,12 @@ export function planSync(meds, opts = {}) {
     if (closed.includes(weekday(anchor))) continue;
     const steps = syncable.map((med) => ({ med, supply: cycleSupply(med, cycle), ...stepFor(med, anchor, cycle, today) }));
     const fixedDays = [
-      ...steps.filter((s) => s.action !== 'short').map((s) => s.alignedOn),
+      ...steps.filter((s) => s.action !== 'short').map((s) => shift(s.alignedOn)),
       ...setAsidePickups,
     ];
-    groupShortPickups(steps, fixedDays, today);
+    groupShortPickups(steps, fixedDays, today, shift);
     const after = unique([
-      ...steps.flatMap((s) => pickupsAfter(s, s.med, today, horizon)),
+      ...steps.flatMap((s) => pickupsAfter(s, s.med, today, horizon).map(shift)),
       ...setAsidePickups,
     ]);
     const shortDays = steps.reduce((sum, s) => sum + (s.action === 'short' ? s.days : 0), 0);
@@ -156,10 +169,11 @@ export function planSync(meds, opts = {}) {
     if (!best || compare(score, best.score) < 0) best = { anchor, steps, after, shortDays, alignedFrom, score };
   }
 
-  if (!best) return { ok: false, reason: 'all-closed', today, cycle, horizon, before, setAside, syncable };
+  if (!best) return { ok: false, reason: 'all-closed', today, cycle, horizon, closed, before, setAside: setAside.map((s) => ({ medId: s.med.id, reason: s.reason, pickups: s.pickups })), syncable };
 
-  // The sync day the household will actually see repeating.
+  // The sync day the household will actually see repeating, and the trip for it.
   const syncDay = best.alignedFrom;
+  const syncTrip = shift(syncDay);
   const fills = best.steps.map((s) => {
     const units = s.action === 'short' ? Math.ceil(s.days * s.med.perDay) : null;
     const copay = Number(s.med.copay);
@@ -168,15 +182,17 @@ export function planSync(meds, opts = {}) {
       : null;
     return {
       medId: s.med.id, action: s.action, date: s.date, pickup: s.pickup ?? s.date, days: s.action === 'short' ? s.days : s.supply, units, copayEst,
-      earlyBy: s.earlyBy ?? 0, alignedOn: s.alignedOn, supply: s.supply, supplyChanged: s.supply !== s.med.daysSupply,
+      earlyBy: s.earlyBy ?? 0, alignedOn: s.alignedOn, alignedTrip: shift(s.alignedOn),
+      supply: s.supply, supplyChanged: s.supply !== s.med.daysSupply,
     };
   });
 
   return {
     ok: true,
-    today, cycle, horizon,
+    today, cycle, horizon, closed,
     anchor: best.anchor,
     syncDay,
+    syncTrip,
     syncDays: Array.from({ length: Math.ceil((today + horizon - best.anchor) / cycle) }, (_, i) => best.anchor + i * cycle)
       .filter((d) => d < today + horizon),
     fills,
@@ -195,10 +211,11 @@ function compare(a, b) {
 // Pickups per bottle, before and after, for drawing the timeline.
 export function timeline(meds, plan) {
   const byId = new Map(plan.ok ? plan.fills.map((f) => [f.medId, f]) : []);
+  const shift = (d) => openOnOrBefore(d, plan.closed || [], plan.today);
   return meds.map((med) => {
-    const before = pickupsAsIs(med, plan.today, plan.horizon);
+    const before = unique(pickupsAsIs(med, plan.today, plan.horizon).map(shift));
     const fill = byId.get(med.id);
-    const after = fill ? pickupsAfter(fill, med, plan.today, plan.horizon) : before;
+    const after = fill ? unique(pickupsAfter(fill, med, plan.today, plan.horizon).map(shift)) : before;
     return { medId: med.id, before, after, fill: fill || null };
   });
 }
