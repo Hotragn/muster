@@ -62,7 +62,9 @@ Built with Claude Code (Anthropic). The AI wrote most of the code, design tokens
 9. `public/brand/social-card.png`: thumbnail / cover image
 
 ## Demo video checklist
-- [ ] 1–3 minutes (script in DEMO.md is about 2:40)
+- [ ] Upload `video/out/muster-demo.mp4` (1:56), or your re-voiced version (see DEMO.md)
+- [ ] If you use the generated voice, add to the description: "Narration is computer-generated (macOS text-to-speech); footage is a scripted recording of the real app."
+- [ ] 1–3 minutes (recorded cut is 1:56; live script is about 2:40)
 - [ ] Shows: before (19), Line them up (19 → 6, "1 trip every 30 days instead of 6"), trip list, pharmacist card, set-aside bottle, editing a date, 4-week cycle, "How Muster worked this out"
 - [ ] Says out loud that the example is fictional and that the pharmacist confirms the plan
 - [ ] Uploaded as public or unlisted on YouTube/Vimeo, viewable without requesting access; link tested in a private window

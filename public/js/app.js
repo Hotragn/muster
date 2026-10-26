@@ -372,7 +372,8 @@ document.addEventListener('click', (ev) => {
 $('#lineup').addEventListener('click', () => {
   view = 'after';
   update({ animate: true });
-  setTimeout(() => $('#result').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' }), reduceMotion ? 0 : 800);
+  // Stay on the timeline so the dots can be seen landing; the trip list starts just below.
+  $('#show-before').focus({ preventScroll: true });
 });
 $('#show-before').addEventListener('click', () => { view = 'before'; update(); $('#lineup').focus(); });
 $('#print').addEventListener('click', () => window.print());

@@ -24,3 +24,4 @@ Deadline: Oct 26, 2026 10:00 PM CDT (= 11:00 PM EDT; machine clock is EDT).
 - **Headless Chrome can't emulate a phone width via --window-size**, so the mobile screenshot came from the in-app browser's device emulation instead.
 | Mon Oct 26 05:46 | 6 | THE STORYTELLER | packaging start |
 | Mon Oct 26 05:48 | 6 | THE STORYTELLER → PRODUCER | Packaging complete: README, DEMO (final), PITCH, SUBMISSION, AI_USAGE, LICENSE, CLAUDE.md. Links made host-independent (.html). Final: 15 unit tests, 48/48 golden-path checks, lint clean, 34/34 contrast. Stopping well before deadline (10:00 PM CDT). |
+| Mon Oct 26 06:10 | 6 | THE STORYTELLER | Demo video recorded by script: video/out/muster-demo.mp4 (1:56, 1080p, captions, TTS voice) + silent cut + timed narration. Removed post-line-up auto-scroll (it hid the wow moment). Narration reworded from "my dad" to "an example household" (fictional data). |
