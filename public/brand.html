@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Muster brand board</title>
+  <meta name="description" content="Muster's logo, colour, type, signature element and voice.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/brand.css">
+  <script type="module" src="js/brand.js"></script>
+</head>
+<body>
+  <header class="bb-top">
+    <a class="lockup" href="./"><img src="brand/symbol.svg" alt=""><span>muster</span></a>
+    <nav aria-label="Pages"><a href="app">Planner</a> · <a href="./">About</a></nav>
+  </header>
+  <main class="bb">
+    <section class="bb-hero">
+      <p class="bb-kicker mono">Brand board</p>
+      <h1>Muster lives at the pharmacy counter.</h1>
+      <p class="bb-lede">Amber vials, off-white thermal labels and the teal ink of a pharmacist's notes. Data is set like a printed Rx label; everything people read is set in a typeface built for low-vision readers.</p>
+    </section>
+
+    <section class="bb-sec" aria-labelledby="logo-h">
+      <h2 id="logo-h">Logo</h2>
+      <div class="bb-logos">
+        <figure><img src="brand/symbol.svg" width="160" height="160" alt="Muster symbol: three dots resting against a vertical bar on an amber tile"><figcaption class="mono">symbol · 160</figcaption></figure>
+        <figure><img src="brand/symbol.svg" width="32" height="32" alt=""><figcaption class="mono">32</figcaption></figure>
+        <figure><img src="brand/symbol.svg" width="16" height="16" alt=""><figcaption class="mono">16</figcaption></figure>
+        <figure class="bb-lockup-big"><span class="lockup"><img src="brand/symbol.svg" alt="" width="64" height="64"><span>muster</span></span><figcaption class="mono">lockup</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="bb-sec" aria-labelledby="sig-h">
+      <h2 id="sig-h">Signature element: the muster line</h2>
+      <p>Scattered dots are bottles due on different days. Dots on the line share a pickup day. It is the logo, the timeline's pickup marker, the line-up animation and the edge of the pharmacist card.</p>
+      <div class="bb-sig" id="sig" aria-hidden="true">
+        <span class="sig-line"></span>
+        <i style="--x:8%;--y:20%"></i><i style="--x:30%;--y:50%"></i><i style="--x:18%;--y:80%"></i>
+        <i style="--x:82%;--y:35%"></i><i style="--x:90%;--y:65%"></i>
+      </div>
+      <button class="btn btn-secondary" id="sig-play" type="button">Line them up</button>
+    </section>
+
+    <section class="bb-sec" aria-labelledby="color-h">
+      <h2 id="color-h">Colour</h2>
+      <p class="muted">Ratios are computed live from the tokens on this page. Body text needs 4.5:1; large text and UI parts need 3:1.</p>
+      <div class="bb-swatches" id="swatches"></div>
+      <table class="bb-contrast">
+        <caption class="visually-hidden">Contrast ratios for the colour pairs the interface uses</caption>
+        <thead><tr><th scope="col">Pair</th><th scope="col">Use</th><th scope="col">Ratio</th><th scope="col">Needs</th><th scope="col">Result</th></tr></thead>
+        <tbody id="contrast"></tbody>
+      </table>
+    </section>
+
+    <section class="bb-sec" aria-labelledby="type-h">
+      <h2 id="type-h">Type</h2>
+      <div class="bb-type">
+        <div>
+          <p class="mono muted">Atkinson Hyperlegible · Braille Institute · SIL OFL 1.1</p>
+          <p class="t-3xl">All the bottles.</p>
+          <p class="t-2xl">One pickup day.</p>
+          <p class="t-xl">From Saturday, December 12</p>
+          <p class="t-lg">Short fill 9 tablets (9 days)</p>
+          <p class="t-md">Body 17px / 1.55. Larger than usual on purpose: the people this serves are often reading over someone's shoulder. Il1 O0 rn m: letters that are easy to confuse stay distinct.</p>
+          <p class="t-sm muted">Small 15px for details and hints.</p>
+        </div>
+        <div class="bb-label">
+          <p class="mono muted">IBM Plex Mono · IBM · SIL OFL 1.1</p>
+          <p class="mono bb-rx">METFORMIN 500 MG TAB<br>QTY 60 · 2/DAY · 30 DAYS<br>FILLED 2026-09-30 · RF 3</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bb-sec" aria-labelledby="voice-h">
+      <h2 id="voice-h">Voice</h2>
+      <ol class="bb-voice">
+        <li>Talk like the pharmacist who's good with families: plain, specific, kind.</li>
+        <li>Numbers before adjectives. "9 tablets", not "a small amount".</li>
+        <li>Never sound sure about someone's health. We plan trips; the pharmacist confirms.</li>
+      </ol>
+      <table class="bb-says">
+        <thead><tr><th scope="col">We say</th><th scope="col">We don't say</th></tr></thead>
+        <tbody>
+          <tr><td>"5 trips a month become 1."</td><td>"Simplify your medication journey."</td></tr>
+          <tr><td>"Ask your pharmacist about this one."</td><td>"This medication cannot be processed."</td></tr>
+          <tr><td>"About $3.60 for 9 days. Your plan may differ."</td><td>"Save money on prescriptions!"</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

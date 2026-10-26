@@ -151,7 +151,7 @@
 .result-head { display: flex; justify-content: space-between; gap: var(--s-4); align-items: center; flex-wrap: wrap; margin-bottom: var(--s-5); }
 .result-head h3 { font-size: var(--fs-lg); max-width: 32ch; }
 .trips { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-4); }
-.trip { display: grid; grid-template-columns: 9.5rem 1fr; gap: var(--s-4); padding-bottom: var(--s-4); border-bottom: 1px solid var(--rule); }
+.trip { display: grid; grid-template-columns: 9.5rem 1fr; align-items: start; gap: var(--s-4); padding-bottom: var(--s-4); border-bottom: 1px solid var(--rule); }
 .trip-date { display: grid; font-weight: var(--fw-bold); }
 .trip-n { font-size: var(--fs-xs); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: var(--fw-regular); }
 .trip ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); }
@@ -209,6 +209,22 @@
 
 /* ---------- printed card ---------- */
 .card { display: none; }
+/* ?card=1 shows the card on screen as a print preview */
+.show-card .topbar, .show-card .layout { display: none; }
+.show-card .card {
+  display: block; max-width: 760px; margin: var(--s-6) auto; padding: var(--s-6);
+  background: #fff; color: #000; border-left: 6px solid var(--c-amber); box-shadow: var(--shadow-lift);
+}
+.show-card .card-head { display: flex; gap: var(--s-4); align-items: flex-start; margin-bottom: var(--s-4); }
+.show-card .card-kicker { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.08em; }
+.show-card .card h1 { font-size: var(--fs-xl); }
+.show-card .card-ask { font-style: italic; margin: var(--s-4) 0; }
+.show-card .card table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.show-card .card th, .show-card .card td { text-align: left; padding: var(--s-2) var(--s-2) var(--s-2) 0; border-bottom: 1px solid #999; vertical-align: top; }
+.show-card .card th { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+.show-card .card-aside td { font-style: italic; }
+.card td.mono { white-space: nowrap; }
+.show-card .card-foot { margin-top: var(--s-5); font-size: var(--fs-xs); color: #333; }
 
 @media print {
   @page { margin: 14mm; }
@@ -223,6 +239,7 @@
   .card th, .card td { text-align: left; padding: 6pt 6pt 6pt 0; border-bottom: 1px solid #999; vertical-align: top; }
   .card th { font-size: 9pt; text-transform: uppercase; letter-spacing: 0.06em; }
   .card-aside td { font-style: italic; }
+  .card td.mono { white-space: nowrap; }
   .card-foot { margin-top: 14pt; font-size: 9pt; color: #333; }
 }
 

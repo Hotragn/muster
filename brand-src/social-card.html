@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../public/css/tokens.css">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body { background: #F6F1E7; color: #1E1A15; font-family: var(--font-sans); position: relative; }
+  .line { position: absolute; left: 640px; top: 70px; bottom: 70px; width: 6px; border-radius: 3px; background: #A34A06; }
+  .dots i { position: absolute; width: 30px; height: 30px; border-radius: 50%; background: #A34A06; left: 595px; }
+  .ghost i { position: absolute; width: 30px; height: 30px; border-radius: 50%; border: 3px dashed #B9AC96; }
+  .copy { position: absolute; left: 80px; top: 120px; width: 470px; }
+  .lock { display: flex; align-items: center; gap: 16px; font-weight: 700; font-size: 44px; }
+  .lock img { width: 64px; height: 64px; }
+  h1 { font-size: 64px; line-height: 1.05; margin: 48px 0 20px; letter-spacing: -0.02em; }
+  h1 span { color: #A34A06; display: block; }
+  p { font-family: var(--font-mono); font-size: 22px; color: #6E6455; margin: 0; }
+  .label { position: absolute; left: 720px; width: 400px; background: #FFFDF8; border-left: 8px solid #A34A06; border-radius: 10px; padding: 18px 22px;
+           box-shadow: 0 6px 20px rgba(30,26,21,.12); font-family: var(--font-mono); font-size: 20px; line-height: 1.5; }
+  .label b { font-family: var(--font-sans); font-size: 26px; display: block; }
+</style></head>
+<body>
+  <div class="copy">
+    <div class="lock"><img src="../public/brand/symbol.svg" alt=""><span>muster</span></div>
+    <h1>All the bottles. <span>One pickup day.</span></h1>
+    <p>19 pharmacy trips → 6 in 90 days</p>
+  </div>
+  <div class="ghost"><i style="left:520px;top:120px"></i><i style="left:548px;top:250px"></i><i style="left:540px;top:470px"></i></div>
+  <span class="line"></span>
+  <div class="dots"><i style="top:140px"></i><i style="top:215px"></i><i style="top:290px"></i><i style="top:365px"></i><i style="top:440px"></i></div>
+  <div class="label" style="top:150px"><b>Metformin 500 mg</b>SHORT FILL 28 TAB · 14 DAYS</div>
+  <div class="label" style="top:290px"><b>Lisinopril 10 mg</b>SHORT FILL 9 TAB · 9 DAYS</div>
+  <div class="label" style="top:430px"><b>Pickup day</b>SAT DEC 12 · THEN EVERY 30</div>
+</body></html>

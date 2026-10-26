@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Muster</title>
+  <meta name="description" content="For whoever does the pharmacy runs: Muster lines up every prescription on one pickup day, with the short fills to ask your pharmacist for.">
+  <meta property="og:title" content="Muster: all the bottles, one pickup day">
+  <meta property="og:description" content="Copy the bottle labels. Muster works out the one-time short fills that put every prescription on the same pickup day.">
+  <meta property="og:image" content="brand/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="lp-top">
+    <a class="lockup" href="./" aria-label="Muster home"><img src="brand/symbol.svg" alt=""><span>muster</span></a>
+    <nav aria-label="Pages"><a href="brand">Brand board</a><a class="btn btn-secondary" href="app?example=1">Open the planner</a></nav>
+  </header>
+
+  <main id="main" class="lp">
+    <!-- the muster line runs down the page; each section is a dot on it -->
+    <section class="lp-hero" aria-labelledby="hero-h">
+      <div class="lp-hero-copy">
+        <p class="lp-kicker mono">For whoever does the pharmacy runs</p>
+        <h1 id="hero-h">Six prescriptions, six pickup days. <span>Muster makes it one.</span></h1>
+        <p class="lp-lede">Copy the dates off the bottle labels. Muster works out the one-time short fills that put every prescription on the same pickup day, then prints a card to hand your pharmacist.</p>
+        <div class="lp-cta">
+          <a class="btn btn-primary btn-big" href="app?example=1">Try it with an example household</a>
+          <a class="btn-quiet lp-own" href="app">Add your own bottles</a>
+        </div>
+        <p class="lp-note muted">Runs in your browser. No account. Nothing is sent anywhere.</p>
+      </div>
+      <figure class="lp-hero-shot">
+        <img src="shots/planner-after.png" width="1280" height="860"
+             alt="The Muster planner after pressing Line them up: seven bottles on a 90-day timeline, their dots sitting on three amber pickup lines, and the counter reading 19 trips crossed out, 6 trips.">
+        <figcaption class="mono">The real planner, example household. 19 trips → 6 in the next 90 days.</figcaption>
+      </figure>
+    </section>
+
+    <section class="lp-sec lp-problem" aria-labelledby="problem-h">
+      <h2 id="problem-h">A typical month</h2>
+      <div class="lp-problem-grid">
+        <p class="lp-story">Saturday night. Dad says he's on his last metformin. You picked up his lisinopril on Tuesday and his thyroid pills the week before. The tamsulosin is due Monday. Every bottle was filled on a different day, so every bottle runs out on a different day. Next month it happens again.</p>
+        <div class="lp-insight">
+          <p class="lp-insight-big">Running out isn't a memory problem. It's calendar arithmetic.</p>
+          <p>Reminders tell you when the next bottle runs out. They can't make the bottles run out together. Pharmacies already can: it's called <strong>medication synchronization</strong>, one-time short fills that move every prescription onto one day. You just have to ask, and asking is a lot easier with the numbers in hand.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-sec lp-ba" aria-labelledby="ba-h">
+      <h2 id="ba-h">Before and after, same seven bottles</h2>
+      <div class="lp-ba-grid">
+        <figure>
+          <img src="shots/planner-before.png" width="1280" height="860" loading="lazy"
+               alt="Before: the timeline shows each bottle's pickups scattered across different days, 19 trips in 90 days.">
+          <figcaption><span class="lp-num">19</span> trips in the next 90 days, each bottle on its own schedule.</figcaption>
+        </figure>
+        <figure>
+          <img src="shots/planner-after.png" width="1280" height="860" loading="lazy"
+               alt="After: the same bottles lined up on shared amber pickup lines, 6 trips in 90 days.">
+          <figcaption><span class="lp-num lp-num-amber">6</span> trips, including the four to get there. Then one every 30 days.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="lp-sec lp-how" aria-labelledby="how-h">
+      <h2 id="how-h">How it works</h2>
+      <ol class="lp-steps">
+        <li class="lp-step">
+          <div class="lp-step-text">
+            <p class="lp-step-n mono">01</p>
+            <h3>Copy each label</h3>
+            <p>Name, how many a day, days' supply, fill date. If you count the pills left, Muster uses the count instead. Tick the box for controlled substances.</p>
+          </div>
+          <img src="shots/editor.png" width="1280" height="860" loading="lazy" alt="The Add a bottle form, filled in for Lisinopril 10 mg: tablet, 1 a day, 30 days' supply, filled October 5.">
+        </li>
+        <li class="lp-step lp-step-flip">
+          <div class="lp-step-text">
+            <p class="lp-step-n mono">02</p>
+            <h3>Press "Line them up"</h3>
+            <p>Muster tries every possible pickup day, skips days the pharmacy is closed, and keeps the one with the fewest trips. Short fills due close together share a trip. Anything that shouldn't be split is set aside with the reason.</p>
+          </div>
+          <img src="shots/planner-after-full.png" width="1280" height="1900" loading="lazy" alt="The lined-up plan listed trip by trip: short fills with tablet counts, a regular fill one day early, and the repeating pickup day.">
+        </li>
+        <li class="lp-step">
+          <div class="lp-step-text">
+            <p class="lp-step-n mono">03</p>
+            <h3>Hand over the card</h3>
+            <p>One printed page: the pickup day, each short fill in tablets and days, the one sentence to say at the counter, and a note that the pharmacist checks it against their record. Doses never change.</p>
+          </div>
+          <img src="shots/card.png" width="900" height="760" loading="lazy" alt="The printed pharmacist card: One pickup day for Dad, Saturday December 12, with a table of each medication's next pickup and fill.">
+        </li>
+      </ol>
+    </section>
+
+    <section class="lp-sec lp-limits" aria-labelledby="limits-h">
+      <h2 id="limits-h">What it doesn't do</h2>
+      <ul>
+        <li><strong>It isn't medical advice.</strong> It plans pickup dates. It never changes a dose, and the pharmacist has the final say.</li>
+        <li><strong>It only knows what you type.</strong> It doesn't connect to a pharmacy, a doctor or an insurer.</li>
+        <li><strong>Some bottles are set aside.</strong> Controlled substances, inhalers, pens, liquids, drops, patches, and supplies that don't fit the cycle.</li>
+        <li><strong>Early refills and copays are rules of thumb.</strong> It assumes a refill is allowed once about 80% is used, and estimates short-fill copays at a daily rate (required for Medicare Part D tablets and capsules; other plans vary).</li>
+        <li><strong>One person per plan, and no reminders.</strong> Bottles are saved only in this browser.</li>
+        <li><strong>Not yet tested with pharmacists or caregivers.</strong> The example household is made up.</li>
+      </ul>
+    </section>
+
+    <section class="lp-sec lp-credits" aria-labelledby="credits-h">
+      <h2 id="credits-h">Credits</h2>
+      <p>Built for NextSpark Hacks 2026. Plain HTML, CSS and JavaScript; no frameworks, no trackers. Type: <a href="fonts/atkinson/OFL.txt">Atkinson Hyperlegible</a> by the Braille Institute and <a href="fonts/plexmono/OFL.txt">IBM Plex Mono</a> by IBM, both under the SIL Open Font License. Medication-sync background: the American Pharmacists Association's Appointment-Based Model; daily cost-sharing rule: 42 CFR 423.153(b)(4).</p>
+      <p><strong>AI disclosure:</strong> designed and written with Claude Code (Anthropic). The AI wrote most of the code and copy under the entrant's direction; the entrant chose the problem, reviewed the plan logic and is responsible for the result. The planner itself uses no AI: every number is computed in your browser.</p>
+    </section>
+  </main>
+
+  <footer class="lp-foot">
+    <span class="lockup"><img src="brand/symbol.svg" alt=""><span>muster</span></span>
+    <p class="muted">All the bottles. One pickup day.</p>
+  </footer>
+</body>
+</html>

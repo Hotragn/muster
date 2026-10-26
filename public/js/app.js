@@ -237,7 +237,7 @@ function renderResult() {
     el('p', { class: 'trip-sync-text' }, `All ${synced} lined-up bottles together. Doses stay the same.`),
     plan.syncDays.some((d) => plan.closed.includes(new Date(d * 86400000).getUTCDay()))
       ? el('p', { class: 'item-detail', text: 'When the day lands on a closed day, the trip moves to the open day before. Choose "4 weeks" to keep the same weekday every time.' }) : null,
-    changed.length ? el('p', { class: 'item-detail muted', text: `Ask for ${changed[0].supply}-day fills from now on (${changed.map((f) => medById(f.medId).name).join(', ')}).` }) : null,
+    changed.length ? el('p', { class: 'item-detail', text: `From now on, ask for ${changed.map((f) => `${f.supply}-day fills of ${medById(f.medId).name}`).join('; ')}.` }) : null,
   ));
 
   const aside = $('#aside');
@@ -271,7 +271,7 @@ function renderCard() {
         el('td', { class: 'mono', text: short(f.action === 'short' ? f.pickup : f.alignedTrip) }),
         el('td', { text: f.action === 'short' ? `Short fill: ${f.units} ${unitWord(med, f.units)} (${plural(f.days, 'day')})`
           : f.action === 'early' ? `Regular fill, ${plural(f.earlyBy, 'day')} early` : 'Regular fill' }),
-        el('td', { class: 'mono', text: `${f.supply}-day fills from ${short(f.alignedTrip)}` }),
+        el('td', { text: `${f.supply}-day fills from ${short(f.alignedTrip)}` }),
       )),
       plan.setAside.map((s) => el('tr', { class: 'card-aside' },
         el('td', { text: medById(s.medId).name }), el('td', { class: 'mono', text: s.pickups[0] != null ? short(s.pickups[0]) : '' }),
@@ -390,3 +390,5 @@ for (const c of document.querySelectorAll('input[name="closed"]')) {
 }
 
 update();
+if (params.has('card') && plan?.ok) { view = 'after'; update(); document.body.classList.add('show-card'); }
+if (params.has('edit')) openEditor(state.meds.some((m) => m.id === params.get('edit')) ? params.get('edit') : null);

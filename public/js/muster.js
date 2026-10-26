@@ -182,7 +182,7 @@ export function planSync(meds, opts = {}) {
       : null;
     return {
       medId: s.med.id, action: s.action, date: s.date, pickup: s.pickup ?? s.date, days: s.action === 'short' ? s.days : s.supply, units, copayEst,
-      earlyBy: s.earlyBy ?? 0, alignedOn: s.alignedOn, alignedTrip: shift(s.alignedOn),
+      earlyBy: s.action === 'early' ? s.date - shift(s.alignedOn) : 0, alignedOn: s.alignedOn, alignedTrip: shift(s.alignedOn),
       supply: s.supply, supplyChanged: s.supply !== s.med.daysSupply,
     };
   });
