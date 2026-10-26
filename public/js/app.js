@@ -151,7 +151,9 @@ function renderCounter(animate) {
   $('#trip-arrow').hidden = !showAfter;
   $('#trips-after').hidden = !showAfter;
   $('#trip-unit').textContent = before === 1 && !showAfter ? 'trip' : 'trips';
+  $('#trip-month').hidden = !showAfter;
   if (!showAfter) return;
+  $('#trip-month').textContent = `Then ${plural(plan.monthAfter, 'trip')} every ${state.settings.cycle} days instead of ${plan.monthBefore}.`;
   const target = plan.after.length;
   if (!animate || reduceMotion) { $('#trips-after').textContent = target; return; }
   const from = before;
@@ -344,8 +346,8 @@ function update({ animate = false } = {}) {
   renderResult();
   $('#plan-title').textContent = view === 'after' ? 'Pickups, lined up' : 'Pickups, as they are now';
   $('#plan-sub').textContent = view === 'after'
-    ? 'Dots now sit on the amber lines: one trip for every bottle.'
-    : 'Each dot is a trip to the pharmacy for one bottle.';
+    ? 'Once lined up, every bottle shares the same amber pickup line.'
+    : 'Each dot is a trip for one bottle. Reminders can\'t fix this: the bottles were filled on different days, so they run out on different days.';
 }
 
 document.addEventListener('click', (ev) => {

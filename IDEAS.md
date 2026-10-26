@@ -26,7 +26,7 @@
 
 ### Insights ("Most people assume X, but actually Y")
 - A1 ✅ **Most people assume running out of medication is a *remembering* problem (so they set reminders), but actually it's a *calendar arithmetic* problem: prescriptions that started on different days stay out of phase forever, and no reminder ever fixes that.**
-- A2 ✅ **Most people assume pickups have to stay scattered, but actually most pharmacies already offer "medication synchronization" (one pickup day a month via one-time short fills) — the patient just has to ask, and arriving with the numbers makes it a two-minute conversation.** (Sources: APhA Appointment-Based Model page; McKesson "Med Sync 101".)
+- A2 ✅ **Most people assume pickups have to stay scattered, but actually many pharmacies already offer "medication synchronization" (one pickup day a month via one-time short fills) — the patient just has to ask, and arriving with the numbers makes it a two-minute conversation.** (Sources: APhA Appointment-Based Model page; McKesson "Med Sync 101".)
 - A3 ✅ Most people assume a short fill costs a full copay, but actually Medicare Part D plans must apply a *daily* cost-sharing rate to solid oral doses dispensed for less than a month (42 CFR 423.153(b)(4)), and several states require the same for synchronization (e.g. NY Insurance Law §3224-d).
 - B1 ✅ Most people assume any job stops the OPT unemployment clock, but actually work under 20 hours/week does not.
 - B2 ❌ (cut: not surprising) Most assume the clock resets with a new job — most students already know it's aggregate.

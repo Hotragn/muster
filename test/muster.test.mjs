@@ -106,6 +106,8 @@ test('example household: set-aside count and a real reduction', () => {
   assert.equal(plan.ok, true);
   assert.equal(plan.setAside.length, 1);
   assert.ok(plan.after.length <= plan.before.length / 2, `${plan.before.length} → ${plan.after.length}`);
+  assert.equal(plan.monthAfter, 1, 'one trip per cycle once lined up');
+  assert.ok(plan.monthBefore >= 6, `as-is month has ${plan.monthBefore} trips`);
   const rows = timeline(meds, plan);
   assert.equal(rows.length, meds.length);
 });

@@ -30,14 +30,15 @@
         <h1 id="bottles-h">The bottles</h1>
         <label class="whose">
           <span class="visually-hidden">Whose bottles are these?</span>
-          <input id="whose" type="text" maxlength="40" placeholder="Whose? e.g. Dad" autocomplete="off">
+          <input id="whose" type="text" maxlength="40" placeholder="For: e.g. Dad" autocomplete="off">
         </label>
       </div>
       <ol id="bottle-list" class="bottle-list" aria-live="polite"></ol>
 
       <div id="empty" class="empty" hidden>
         <div class="empty-mark" aria-hidden="true"><span></span><span></span><span></span></div>
-        <p>No bottles yet. Add the first one from the counter, or load the example to see how it works.</p>
+        <p><strong>Muster puts every prescription on one pickup day.</strong> Copy each bottle's label, press Line them up, and get the short fills to ask your pharmacist for.</p>
+        <p class="muted">No bottles yet. Add the first one from the counter, or load the example to see how it works.</p>
         <div class="row">
           <button class="btn btn-primary" type="button" data-action="add">Add a bottle</button>
           <button class="btn btn-secondary" type="button" data-action="example">Load example household</button>
@@ -61,6 +62,7 @@
           <span class="trip-label mono">Next 90 days</span>
           <span class="trip-nums"><span id="trips-before" class="trip-before">0</span><span class="trip-arrow" id="trip-arrow" aria-hidden="true">→</span><span id="trips-after" class="trip-after"></span></span>
           <span class="trip-unit" id="trip-unit">trips</span>
+          <span class="trip-month" id="trip-month" hidden></span>
         </div>
       </div>
 

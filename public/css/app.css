@@ -78,6 +78,7 @@
 .trip-after { color: var(--c-amber); }
 .trip-arrow { color: var(--text-muted); font-size: var(--fs-xl); }
 .trip-unit { font-size: var(--fs-sm); color: var(--text-muted); }
+.trip-month { margin-top: var(--s-2); font-size: var(--fs-sm); font-weight: var(--fw-bold); color: var(--c-ink); line-height: var(--lh-snug); max-width: 20ch; text-align: right; }
 .trip-nums:has(.trip-arrow:not([hidden])) .trip-before { color: var(--text-muted); text-decoration: line-through; text-decoration-thickness: 3px; font-size: var(--fs-2xl); }
 
 /* timeline */

@@ -46,6 +46,8 @@
 
 .lp-problem-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-6); align-items: start; }
 .lp-story { font-size: var(--fs-lg); max-width: 40ch; }
+.lp-story-note { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--s-2); }
+.lp-problem-grid > div:first-child { display: grid; }
 .lp-insight { display: grid; gap: var(--s-4); background: var(--surface); padding: var(--s-5); border-radius: var(--r-lg); border: 1px solid var(--rule); box-shadow: var(--shadow-label); }
 .lp-insight-big { font-size: var(--fs-xl); font-weight: var(--fw-bold); line-height: var(--lh-snug); color: var(--c-ink); }
 

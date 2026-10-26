@@ -187,8 +187,17 @@ export function planSync(meds, opts = {}) {
     };
   });
 
+  // The lasting difference: trips in one cycle as things are now, and one cycle once lined up.
+  const inCycle = (start, days) => days.filter((d) => d >= start && d < start + cycle).length;
+  const steadyAfter = unique([
+    ...best.steps.flatMap((s) => pickupsAfter(s, s.med, today, syncTrip - today + cycle * 2).map(shift)),
+    ...setAside.flatMap((s) => pickupsAsIs(s.med, today, syncTrip - today + cycle * 2).map(shift)),
+  ]);
+
   return {
     ok: true,
+    monthBefore: inCycle(today, before),
+    monthAfter: inCycle(syncTrip, steadyAfter),
     today, cycle, horizon, closed,
     anchor: best.anchor,
     syncDay,
