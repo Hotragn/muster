@@ -13,3 +13,4 @@
 | 9 | BRAND DESIGNER | Atkinson Hyperlegible for display and body, IBM Plex Mono for label data. | Hyperlegible was built for low-vision readers (older patients); mono echoes printed Rx labels. Both OFL. |
 | 10 | BRAND DESIGNER | Wordmark uses live text in inline SVG rather than outlined paths. | No font-to-path tool installed; the font is vendored and loaded on every page that shows it. |
 | 11 | PRODUCER | Feature freeze at 05:5x EDT; all stretch goals cut. | Golden path complete; remaining time goes to verification and packaging. |
+| 12 | STORYTELLER | Demo narration uses Kokoro-82M (Apache-2.0) via kokoro-onnx (MIT), voice af_heart. | Most-used open TTS model with permissive weights; Coqui XTTS is non-commercial and unmaintained, the original Piper repo is archived. |

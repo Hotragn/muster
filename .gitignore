@@ -4,3 +4,5 @@ node_modules/
 *.log
 video/out/
 video/work/
+video/tts/.venv/
+video/tts/models/

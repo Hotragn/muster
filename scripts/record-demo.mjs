@@ -3,12 +3,14 @@
 // held for exactly as long as its narration clip.
 //
 // Usage (server running via `npm start`):
-//   node scripts/record-demo.mjs            # 1920x1080 video, captions, TTS narration track
-//   VOICE=Samantha RATE=178 node scripts/record-demo.mjs
+//   node scripts/record-demo.mjs            # 1920x1080 video, captions, narration track
+//   VOICE=am_michael SPEED=1.0 node scripts/record-demo.mjs
+// Narration: Kokoro-82M (open-source, Apache-2.0) via video/tts (see video/README.md).
+// If that isn't installed, falls back to macOS `say` (VOICE=Samantha).
 // Output: video/out/muster-demo.mp4 (with voice), muster-demo-silent.mp4 (captions only),
 //         narration.txt (script with timings, for recording your own voice).
 import { spawn, execFileSync } from 'node:child_process';
-import { mkdirSync, rmSync, writeFileSync, mkdtempSync } from 'node:fs';
+import { existsSync, mkdirSync, rmSync, writeFileSync, mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -16,7 +18,9 @@ import { fileURLToPath } from 'node:url';
 const ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const CHROME = process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const BASE = process.env.BASE || 'http://localhost:4173';
-const VOICE = process.env.VOICE || 'Samantha';
+const TTS_PY = join(ROOT, 'video/tts/.venv/bin/python');
+const USE_KOKORO = existsSync(TTS_PY) && existsSync(join(ROOT, 'video/tts/models/kokoro-v1.0.onnx')) && process.env.TTS !== 'say';
+const VOICE = process.env.VOICE || (USE_KOKORO ? 'af_heart' : 'Samantha');
 const RATE = process.env.RATE || '178';
 const OUT = join(ROOT, 'video/out');
 const WORK = join(ROOT, 'video/work');
@@ -137,12 +141,18 @@ rmSync(WORK, { recursive: true, force: true });
 mkdirSync(join(WORK, 'frames'), { recursive: true });
 mkdirSync(OUT, { recursive: true });
 const durationOf = (f) => Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]).toString().trim());
-for (const s of scenes) {
-  s.audio = join(WORK, `${s.id}.aiff`);
-  execFileSync('say', ['-v', VOICE, '-r', RATE, '-o', s.audio, s.say]);
-  s.dur = durationOf(s.audio);
+if (USE_KOKORO) {
+  for (const s of scenes) s.audio = join(WORK, `${s.id}.wav`);
+  writeFileSync(join(WORK, 'tts-jobs.json'), JSON.stringify(scenes.map((s) => ({ text: s.say, out: s.audio }))));
+  execFileSync(TTS_PY, ['-I', join(ROOT, 'video/tts/tts.py'), join(WORK, 'tts-jobs.json')], { env: { ...process.env, VOICE }, stdio: ['ignore', 'ignore', 'inherit'] });
+} else {
+  for (const s of scenes) {
+    s.audio = join(WORK, `${s.id}.aiff`);
+    execFileSync('say', ['-v', VOICE, '-r', RATE, '-o', s.audio, s.say]);
+  }
 }
-console.log(`narration: ${scenes.reduce((a, s) => a + s.dur, 0).toFixed(1)} s of speech in ${scenes.length} scenes`);
+for (const s of scenes) s.dur = durationOf(s.audio);
+console.log(`narration (${USE_KOKORO ? 'Kokoro-82M' : 'macOS say'}, ${VOICE}): ${scenes.reduce((a, s) => a + s.dur, 0).toFixed(1)} s in ${scenes.length} scenes`);
 
 // ---------- browser ----------
 const PORT = 9334;
@@ -327,7 +337,7 @@ const delays = scenes.map((s, i) => {
   const ms = Math.round((timeline[i].at + shift) * 1000);
   return `[${i + 1}:a]aresample=48000,adelay=${ms}|${ms}[a${i}]`;
 });
-const mix = `${delays.join(';')};${scenes.map((_, i) => `[a${i}]`).join('')}amix=inputs=${scenes.length}:normalize=0,volume=1.0[aout]`;
+const mix = `${delays.join(';')};${scenes.map((_, i) => `[a${i}]`).join('')}amix=inputs=${scenes.length}:normalize=0,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000[aout]`;
 execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', silent, ...inputs, '-filter_complex', mix,
   '-map', '0:v', '-map', '[aout]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', join(OUT, 'muster-demo.mp4')]);
 

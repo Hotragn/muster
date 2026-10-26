@@ -8,7 +8,7 @@ Muster was built with **Claude Code (Anthropic; model Claude Opus 5.5)**, a codi
 | Idea | Drafted candidate users, insights and 12 ideas; scored and red-teamed them; picked medication sync. | **To do before submitting:** review and confirm the idea and its claims; be ready to explain it. |
 | Code | Wrote the solver, tests, UI, server, lint config, golden-path and screenshot scripts. | **To do:** read `public/js/muster.js` and `test/muster.test.mjs` so you can explain the algorithm to judges. |
 | Design | Wrote the brand concept, colour tokens and contrast script; hand-built the SVG logo; wrote the copy. | **To do:** approve the name and brand. |
-| Demo video | Wrote `scripts/record-demo.mjs`, which drives the real app in headless Chrome, draws a cursor and captions, and times scenes to narration. Narration voice is macOS text-to-speech reading the AI-written script. | **To do:** watch it end to end; optionally re-voice it yourself. |
+| Demo video | Wrote `scripts/record-demo.mjs`, which drives the real app in headless Chrome, draws a cursor and captions, and times scenes to narration. Narration voice is the open-source Kokoro-82M text-to-speech model (Apache-2.0) reading the AI-written script. | **To do:** watch it end to end; optionally re-voice it yourself. |
 | Docs | Wrote README, DEMO, PITCH, SUBMISSION and the logs. | **To do:** record the video, edit the docs to your voice, and state your own contributions honestly on Devpost. |
 
 Third-party, non-AI material: Atkinson Hyperlegible and IBM Plex Mono (SIL OFL 1.1), ESLint (MIT). Nothing else was copied from other projects.

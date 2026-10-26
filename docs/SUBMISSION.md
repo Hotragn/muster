@@ -32,7 +32,7 @@ A working planner that turns real label data into a pharmacist-ready plan, an an
 Test with caregivers and an independent pharmacy; read labels from a photo (every field confirmed by the user); calendar export of the pickup day; several people per household.
 
 ## Built with
-HTML, CSS, JavaScript (ES modules), Node.js (static server, `node:test`), ESLint, headless Google Chrome (screenshots and end-to-end checks), Atkinson Hyperlegible and IBM Plex Mono fonts (SIL OFL 1.1).
+HTML, CSS, JavaScript (ES modules), Node.js (static server, `node:test`), ESLint, headless Google Chrome (screenshots, end-to-end checks, demo recording), ffmpeg, Kokoro-82M + kokoro-onnx (demo narration only), Atkinson Hyperlegible and IBM Plex Mono fonts (SIL OFL 1.1).
 
 ## External resources
 - American Pharmacists Association, Appointment-Based Model (medication synchronization)
@@ -62,9 +62,9 @@ Built with Claude Code (Anthropic). The AI wrote most of the code, design tokens
 9. `public/brand/social-card.png`: thumbnail / cover image
 
 ## Demo video checklist
-- [ ] Upload `video/out/muster-demo.mp4` (1:56), or your re-voiced version (see DEMO.md)
-- [ ] If you use the generated voice, add to the description: "Narration is computer-generated (macOS text-to-speech); footage is a scripted recording of the real app."
-- [ ] 1–3 minutes (recorded cut is 1:56; live script is about 2:40)
+- [ ] Upload `video/muster-demo.mp4` (1:58), or your re-voiced version (see DEMO.md)
+- [ ] If you use the generated voice, add to the description: "Narration is computer-generated with the open-source Kokoro-82M voice model; footage is a scripted recording of the real app."
+- [ ] 1–3 minutes (recorded cut is 1:58; live script is about 2:40)
 - [ ] Shows: before (19), Line them up (19 → 6, "1 trip every 30 days instead of 6"), trip list, pharmacist card, set-aside bottle, editing a date, 4-week cycle, "How Muster worked this out"
 - [ ] Says out loud that the example is fictional and that the pharmacist confirms the plan
 - [ ] Uploaded as public or unlisted on YouTube/Vimeo, viewable without requesting access; link tested in a private window

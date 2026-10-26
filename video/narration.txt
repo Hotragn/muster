@@ -1,0 +1,23 @@
+[0:00] (0.7s) Muster.
+
+[0:02] (16.2s) Here's an example household: one dad, seven prescriptions, each filled on a different day, so each one runs out on a different day. Every dot is a trip to the pharmacy. That's nineteen trips in the next ninety days. Reminders can't fix that. The dates are out of step.
+
+[0:19] (8.2s) One press. Muster tries every possible pickup day, skips Sundays when the pharmacy is closed, and keeps the plan with the fewest trips.
+
+[0:28] (7.6s) Nineteen trips become six, and that includes the changeover. After that, it is one trip every thirty days, instead of six.
+
+[0:36] (17.9s) Here's the changeover. Trip one, this Friday: a short fill of twenty-eight metformin and nine lisinopril, just enough to reach the next pickup day. On the thirteenth, the levothyroxine is refilled a day early, so it joins the others. From Saturday, December twelfth, everything comes together.
+
+[0:54] (13.2s) Many pharmacies already offer this. It's called medication synchronization. But you have to ask, with the numbers. This card is the ask: the pickup day, every short fill in tablets, and what to say at the counter.
+
+[1:08] (8.1s) It won't split what shouldn't be split. Tramadol is a controlled substance, so it's set aside, with the reason, for the pharmacist to decide.
+
+[1:16] (8.0s) Change a fill date, and the whole plan recomputes on the spot. Nothing is sent anywhere; it is all worked out right here in the browser.
+
+[1:25] (8.2s) On a thirty-day cycle, the weekday drifts. Four weeks keeps the same day every time, and Muster tells you to ask for twenty-eight-day fills.
+
+[1:34] (13.9s) And it shows its working. Run-out day is the fill date plus the days' supply. Copays use a daily rate, which Medicare Part D requires for short fills of tablets. It never changes a dose. The pharmacist checks the plan.
+
+[1:48] (6.0s) No account, and nothing leaves your browser. Built for everyone who has become their parent’s pharmacy runner.
+
+[1:54] (2.4s) Muster. All the bottles, one pickup day.

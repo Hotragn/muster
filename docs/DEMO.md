@@ -1,17 +1,17 @@
 # DEMO: Muster
 
 ## Recorded video (ready to upload)
-`video/out/muster-demo.mp4`: 1:56, 1920×1080, captions burned in, narration by macOS text-to-speech (voice "Samantha"). Footage is the real app driven by `scripts/record-demo.mjs` in headless Chrome. The cursor, click rings, captions and the title/end cards are drawn on top for viewers; they are not part of the app. The print dialog can't appear in headless Chrome, so the card scene shows the same card on screen (`card=1` preview).
+`video/muster-demo.mp4`: 1:58, 1920×1080, captions burned in, narration by the open-source **Kokoro-82M** voice model (voice `af_heart`, Apache-2.0) via kokoro-onnx. Footage is the real app driven by `scripts/record-demo.mjs` in headless Chrome. The cursor, click rings, captions and the title/end cards are drawn on top for viewers; they are not part of the app. The print dialog can't appear in headless Chrome, so the card scene shows the same card on screen (`card=1` preview).
 
 Also produced:
 - `video/out/muster-demo-silent.mp4`: same video, captions, no voice. Use it to record your own narration.
-- `video/out/narration.txt`: every line with its start time and length.
+- `video/narration.txt`: every line with its start time and length.
 
 **Your own voice (recommended if you have 15 minutes):** open `muster-demo-silent.mp4` in iMovie, or QuickTime → File → New Audio Recording, and read `narration.txt` line by line at each timestamp. Then drop the audio under the video. A human voice is warmer; the captions already match.
 
-**Regenerate** (for example after changing the app or the wording in the `scenes` list): `npm start`, then `node scripts/record-demo.mjs`. Optional: `VOICE=Shelley RATE=170 node scripts/record-demo.mjs`. Each run takes about 2.5 minutes.
+**Regenerate** (for example after changing the app or the wording in the `scenes` list): see [video/README.md](../video/README.md). Each run takes about 2.5 minutes.
 
-**On Devpost, say:** "Narration is computer-generated (macOS text-to-speech); the footage is a scripted recording of the real app." (Skip this if you re-voice it.)
+**On Devpost, say:** "Narration is computer-generated with the open-source Kokoro-82M voice model; the footage is a scripted recording of the real app." (Skip this if you re-voice it.)
 
 ---
 
