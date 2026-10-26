@@ -22,3 +22,4 @@ Deadline: Oct 26, 2026 10:00 PM CDT (= 11:00 PM EDT; machine clock is EDT).
 - **A bottle due two days after the sync day** shouldn't need a 28-day short fill; refilling it a couple of days early on the sync day is what pharmacies do. Added that rule.
 - **A test that passed for the wrong reason.** The brand-board contrast check passed while /brand was serving the 404 page (a folder named brand/ shadowed brand.html). Tightened the test to count passing rows, and fixed routing so pages beat folders.
 - **Headless Chrome can't emulate a phone width via --window-size**, so the mobile screenshot came from the in-app browser's device emulation instead.
+| Mon Oct 26 05:46 | 6 | THE STORYTELLER | packaging start |

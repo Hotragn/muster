@@ -1,26 +1,56 @@
-# DEMO (draft v1, Phase 2; final version written in Phase 6)
+# DEMO: Muster (final script, about 2:40)
 
-3-minute script. Product name is set in Phase 3 (placeholder: "the app").
+## Setup before recording
+1. `npm install && npm start`
+2. Browser at 1280×800 or larger, light mode, zoom 100%. Close other tabs.
+3. Open **http://localhost:4173/app?example=1&today=2026-10-26**. The fixed `today` keeps every number and date below identical. If you reload with `example=1`, the example resets.
+4. Have a second tab ready on http://localhost:4173/ (landing) for the close.
+5. Rehearse once: the line-up animation lasts about 0.7 s.
 
-## Scene 1: the painful before (0:00–0:20)
-- On screen: the planner loaded with the example household "Dad's bottles": six Rx-label cards, and a month calendar with pickup dots on six different days.
-- Action: hover the calendar; the header reads "Next 90 days: 17 trips".
-- Narration: "This is my dad's counter. Six prescriptions, filled on six different days. Every few days, someone drives to the pharmacy. Reminders don't fix this. The bottles were never due on the same day to begin with."
+## Shot list and narration (read word for word)
 
-## Scene 2: the wow (0:20–1:20)
-- Action: press **Line them up**.
-- On screen: dots slide along the calendar onto one day; the counter animates "17 trips → 5"; a banner: "From Dec 4, one pickup every 30 days".
-- Action: scroll to the transition list: each bottle shows "Next fill Nov 9: short fill 9 tablets (9 days) so it ends on Dec 4".
-- Action: press **Print the pharmacist card**. The print preview shows a one-page card with the sync day, each short fill, and the sentence to say at the counter.
-- Narration: "One press. It finds the day that needs the fewest extra trips, and works out the one-time short fill each bottle needs to land on that day. Pharmacies already do this, it's called medication synchronization, but you have to ask, with numbers. This card is the ask."
+### Scene 1: the before (0:00–0:22)
+**On screen:** planner, before state. Slowly move the cursor down the bottle list, then across the timeline rows.
+> "This is my dad's counter: seven prescriptions. Every one was filled on a different day, so every one runs out on a different day. Muster puts them on a timeline. Each dot is a trip to the pharmacy. That's nineteen trips in the next ninety days. Reminders don't fix this. The dates are out of step."
 
-## Scene 3: depth that proves it's real (1:20–2:20)
-- Action: open a bottle card and change its fill date; the plan recomputes and the counter updates.
-- Action: point to the flagged bottle (a controlled-substance pain medication) set aside with the reason "Controlled substances usually can't be short-filled. Ask your pharmacist." Point to the inhaler: "Not countable by tablet. Ask if it can be aligned."
-- Action: hover a short fill: "Copay about $3.60 for 9 days. Medicare Part D charges a daily rate for short fills of tablets (42 CFR 423.153). Your plan may differ."
-- Action: switch cycle to "Every 4 weeks (same weekday)". The sync day becomes a fixed weekday that avoids the Sunday closure.
-- Narration: "It shows its working. Every run-out date is the fill date plus days' supply. It won't sync what shouldn't be synced, and it never touches a dose. The pharmacist checks the plan against the real record; the card says so."
+**Point at:** the big **19**, then the "Trips" row of black ticks.
 
-## Scene 4: close (2:20–2:40)
-- On screen: before/after side by side, then the logo and tagline.
-- Narration: "Five fewer drives a month. Nothing to install, no account, nothing leaves the browser. Built for every kid who's become their parent's pharmacy runner."
+### Scene 2: the wow (0:22–1:20)
+**Action:** click **Line them up**. Hold still for two seconds while the dots slide onto the amber lines and the counter goes to **19 → 6**.
+> "One press. Muster tried every possible pickup day, skipped Sundays when the pharmacy's closed, and found the one with the fewest trips. Nineteen becomes six, and that includes getting there. After that, it's one trip every thirty days instead of six."
+
+**Point at:** the teal line "Then 1 trip every 30 days instead of 6."
+**Action:** scroll to the trip list.
+> "Here's how it gets there. Trip one, Friday: a short fill of twenty-eight metformin and nine lisinopril, just enough to reach the pickup day. The levothyroxine is refilled a day early. From Saturday, December 12th, everything comes together."
+
+**Action:** click **Print the pharmacist card**. The print preview shows one page.
+> "Pharmacies already do this. It's called medication synchronization, but you have to ask, with numbers. This card is the ask: the pickup day, every short fill in tablets, and the sentence to say at the counter."
+
+Close the print dialog.
+
+### Scene 3: depth that proves it's real (1:20–2:20)
+**Action:** scroll to "Set aside".
+> "It won't split what shouldn't be split. Tramadol is a controlled substance, so it's set aside with the reason, and the pharmacist decides."
+
+**Action:** click the **Lisinopril** card. Change *Filled on* to **10/20/2026**. Save.
+> "Change a date and the whole plan recomputes."
+
+**Action:** click **4 weeks (same weekday)**.
+> "On a thirty-day cycle the weekday drifts. Four weeks keeps the same day every time, and Muster tells you to ask for twenty-eight-day fills."
+
+**Action:** expand **How Muster worked this out**.
+> "Every number shows its working: run-out day is fill date plus days' supply. Copays use a daily rate, which Medicare Part D requires for short fills of tablets. And it never touches a dose."
+
+### Scene 4: close (2:20–2:40)
+**Action:** switch to the landing tab; scroll slowly past "Before and after".
+> "No account, nothing leaves the browser. Muster: all the bottles, one pickup day. Built for everyone who's become their parent's pharmacy runner."
+
+## Thumbnail suggestion
+Use `public/brand/social-card.png` (1200×630): the amber muster line with dots against it, "All the bottles. One pickup day.", and "19 pharmacy trips → 6 in 90 days".
+
+## If something fails on camera
+- **Animation didn't play / page looks stale:** reload `…/app?example=1&today=2026-10-26` and click again (the example resets on load).
+- **Print dialog won't open:** open `…/app?example=1&today=2026-10-26&card=1`, an on-screen preview of the same card.
+- **Server not running:** `npm start` again; nothing else is needed (no network).
+- **Edits went wrong mid-take:** reload the example URL; it resets everything.
+- **Worst case:** narrate over `public/shots/planner-before.png`, `planner-after.png` and `card.png`; they are real captures of the same flow.
