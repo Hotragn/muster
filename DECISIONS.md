@@ -12,3 +12,4 @@
 | 8 | NAMING STRATEGIST | Name "Muster", tagline "All the bottles. One pickup day." | No collision in pharmacy space; the meaning is the product. |
 | 9 | BRAND DESIGNER | Atkinson Hyperlegible for display and body, IBM Plex Mono for label data. | Hyperlegible was built for low-vision readers (older patients); mono echoes printed Rx labels. Both OFL. |
 | 10 | BRAND DESIGNER | Wordmark uses live text in inline SVG rather than outlined paths. | No font-to-path tool installed; the font is vendored and loaded on every page that shows it. |
+| 11 | PRODUCER | Feature freeze at 05:5x EDT; all stretch goals cut. | Golden path complete; remaining time goes to verification and packaging. |

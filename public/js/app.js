@@ -45,7 +45,6 @@ let state = load() || { meds: [], settings: { cycle: 30, closed: [0], whose: '' 
 if (params.has('example')) state = { meds: exampleHousehold(TODAY_ISO), settings: { cycle: 30, closed: [0], whose: 'Dad' }, isExample: true };
 let view = params.has('after') ? 'after' : 'before';
 let plan = null;
-let shownAfter = 0;
 
 function persist() { save(state); }
 function computePlan() {
@@ -152,9 +151,9 @@ function renderCounter(animate) {
   $('#trip-arrow').hidden = !showAfter;
   $('#trips-after').hidden = !showAfter;
   $('#trip-unit').textContent = before === 1 && !showAfter ? 'trip' : 'trips';
-  if (!showAfter) { shownAfter = before; return; }
+  if (!showAfter) return;
   const target = plan.after.length;
-  if (!animate || reduceMotion) { $('#trips-after').textContent = target; shownAfter = target; return; }
+  if (!animate || reduceMotion) { $('#trips-after').textContent = target; return; }
   const from = before;
   const start = performance.now();
   const dur = 700;
@@ -162,7 +161,7 @@ function renderCounter(animate) {
     const t = Math.min(1, (now - start) / dur);
     const v = Math.round(from + (target - from) * (1 - (1 - t) ** 3));
     $('#trips-after').textContent = v;
-    if (t < 1) requestAnimationFrame(tick); else shownAfter = target;
+    if (t < 1) requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
 }

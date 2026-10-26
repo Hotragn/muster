@@ -17,8 +17,9 @@ createServer(async (req, res) => {
     const url = new URL(req.url, 'http://localhost');
     let path = normalize(join(root, decodeURIComponent(url.pathname)));
     if (!path.startsWith(root)) { res.writeHead(403).end('Forbidden'); return; }
-    if ((await stat(path).catch(() => null))?.isDirectory()) path = join(path, 'index.html');
-    if (!extname(path) && !(await stat(path).catch(() => null))) path += '.html';
+    // Clean URLs: /app → app.html. A page wins over a folder of the same name (/brand vs brand/).
+    if (!extname(path) && (await stat(`${path}.html`).catch(() => null))?.isFile()) path += '.html';
+    else if ((await stat(path).catch(() => null))?.isDirectory()) path = join(path, 'index.html');
     const body = await readFile(path);
     res.writeHead(200, { 'Content-Type': types[extname(path)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
     res.end(body);
