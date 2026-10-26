@@ -21,7 +21,7 @@
 
 **Point at:** the teal line "Then 1 trip every 30 days instead of 6."
 **Action:** scroll to the trip list.
-> "Here's how it gets there. Trip one, Friday: a short fill of twenty-eight metformin and nine lisinopril, just enough to reach the pickup day. The levothyroxine is refilled a day early. From Saturday, December 12th, everything comes together."
+> "Here's how it gets there. Trip one, Friday: a short fill of twenty-eight metformin and nine lisinopril, just enough to reach the next pickup day. On the thirteenth, the levothyroxine is refilled a day early so it joins the others. From Saturday, December 12th, everything comes together."
 
 **Action:** click **Print the pharmacist card**. The print preview shows one page.
 > "Pharmacies already do this. It's called medication synchronization, but you have to ask, with numbers. This card is the ask: the pickup day, every short fill in tablets, and the sentence to say at the counter."

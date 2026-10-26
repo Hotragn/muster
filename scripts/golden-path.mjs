@@ -100,7 +100,7 @@ await go('/app?today=2026-10-26&example=1&after=1');
 check('no horizontal scroll at 375px (planner)', await evaluate("document.documentElement.scrollWidth <= innerWidth"), String(await evaluate('document.documentElement.scrollWidth')));
 await go('/');
 check('no horizontal scroll at 375px (landing)', await evaluate("document.documentElement.scrollWidth <= innerWidth"), String(await evaluate('document.documentElement.scrollWidth')));
-await go('/brand');
+await go('/brand.html');
 check('no horizontal scroll at 375px (brand)', await evaluate("document.documentElement.scrollWidth <= innerWidth"), String(await evaluate('document.documentElement.scrollWidth')));
 check('brand board contrast all pass', (await evaluate("document.querySelectorAll('#contrast .pass').length")) === 11 && (await evaluate("document.querySelectorAll('#contrast .fail').length")) === 0);
 await go('/does-not-exist');
