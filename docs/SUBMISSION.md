@@ -70,5 +70,5 @@ Built with Claude Code (Anthropic). The AI wrote most of the code, design tokens
 - [ ] Uploaded as public or unlisted on YouTube/Vimeo, viewable without requesting access; link tested in a private window
 
 ## Links
-- **Source code:** https://github.com/Hotragn/muster *(private now. Devpost requires a public repo: run `gh repo edit Hotragn/muster --visibility public --accept-visibility-change-consequences` before you submit.)*
+- **Source code:** https://github.com/Hotragn/muster (public)
 - **Live demo (optional):** none yet. Any static host serving `public/` works (GitHub Pages: serve `public/`, open `app.html?example=1`).
