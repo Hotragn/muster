@@ -9,3 +9,6 @@
 | 5 | INVENTOR | Bottle-photo label reading (idea 10) is a stretch goal only. | Demo must run offline; core value is the scheduling, not extraction. |
 | 6 | PRODUCT DIRECTOR | No framework, no build step; vanilla ES modules + zero-dep Node server. | Smallest thing that works; nothing to break on demo day. |
 | 7 | PRODUCT DIRECTOR | Optimise for fewest trips in 90 days, then fewest short-fill days. | Trips are the user's pain; with daily-rate copays, short-fill days cost little extra. |
+| 8 | NAMING STRATEGIST | Name "Muster", tagline "All the bottles. One pickup day." | No collision in pharmacy space; the meaning is the product. |
+| 9 | BRAND DESIGNER | Atkinson Hyperlegible for display and body, IBM Plex Mono for label data. | Hyperlegible was built for low-vision readers (older patients); mono echoes printed Rx labels. Both OFL. |
+| 10 | BRAND DESIGNER | Wordmark uses live text in inline SVG rather than outlined paths. | No font-to-path tool installed; the font is vendored and loaded on every page that shows it. |

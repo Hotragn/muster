@@ -1,0 +1,125 @@
+/* Muster design tokens. The UI uses only these variables.
+   Concept: the pharmacy counter — amber vials, thermal-printed Rx labels,
+   the pharmacist's counting tray. Signature element: the muster line. */
+
+@font-face { font-family: "Atkinson Hyperlegible"; src: url("../fonts/atkinson/AtkinsonHyperlegible-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Atkinson Hyperlegible"; src: url("../fonts/atkinson/AtkinsonHyperlegible-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Atkinson Hyperlegible"; src: url("../fonts/atkinson/AtkinsonHyperlegible-Italic.ttf") format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../fonts/plexmono/IBMPlexMono-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../fonts/plexmono/IBMPlexMono-SemiBold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+
+:root {
+  /* color: light (label paper) */
+  --c-amber: #A34A06;        /* primary: amber prescription vial */
+  --c-amber-strong: #7C3604;
+  --c-amber-wash: #FBE7CF;
+  --c-ink: #0F5A55;          /* accent: counseling-room teal ink */
+  --c-ink-wash: #DDEFEC;
+  --c-n0: #FFFDF8;           /* label paper */
+  --c-n1: #F6F1E7;           /* counter */
+  --c-n2: #E7DECD;           /* rule lines */
+  --c-n3: #B9AC96;           /* decorative borders only */
+  --c-n4: #6E6455;           /* secondary text */
+  --c-n5: #3B342B;
+  --c-n6: #1E1A15;           /* body text */
+  --c-ok: #22703A;
+  --c-warn: #8A5A00;
+  --c-warn-wash: #FFF3D6;
+  --c-danger: #B3261E;
+  --c-danger-wash: #FCE4E1;
+  --c-on-amber: #FFFDF8;
+
+  --bg: var(--c-n1);
+  --surface: var(--c-n0);
+  --text: var(--c-n6);
+  --text-muted: var(--c-n4);
+  --rule: var(--c-n2);
+  --border: var(--c-n3);
+  --control-border: var(--c-n4);
+  --focus: var(--c-ink);
+
+  /* type */
+  --font-sans: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --fs-xs: 0.8125rem;   /* 13 */
+  --fs-sm: 0.9375rem;   /* 15 */
+  --fs-md: 1.0625rem;   /* 17 body: larger than default, for older eyes */
+  --fs-lg: 1.375rem;    /* 22 */
+  --fs-xl: 1.875rem;    /* 30 */
+  --fs-2xl: 2.75rem;    /* 44 */
+  --fs-3xl: 4rem;       /* 64 */
+  --lh-tight: 1.1;
+  --lh-snug: 1.3;
+  --lh-body: 1.55;
+  --fw-regular: 400;
+  --fw-bold: 700;
+  --fw-mono-strong: 600;
+
+  /* spacing (4px base) */
+  --s-1: 0.25rem; --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem;
+  --s-5: 1.5rem; --s-6: 2rem; --s-7: 3rem; --s-8: 4.5rem;
+
+  /* radii: labels have soft corners, vials are round */
+  --r-sm: 4px; --r-md: 8px; --r-lg: 14px; --r-pill: 999px;
+
+  /* shadows: a label resting on a counter */
+  --shadow-label: 0 1px 0 rgba(30, 26, 21, 0.06), 0 2px 6px rgba(30, 26, 21, 0.06);
+  --shadow-lift: 0 6px 20px rgba(30, 26, 21, 0.12);
+
+  /* motion */
+  --t-fast: 120ms;
+  --t-med: 240ms;
+  --t-muster: 700ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* signature: the muster line */
+  --muster-line: 3px;
+  --dot: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --c-amber: #F2A45A;
+    --c-amber-strong: #F7BF84;
+    --c-amber-wash: #3A2512;
+    --c-ink: #6CCFC3;
+    --c-ink-wash: #12302D;
+    --c-n0: #211D17;
+    --c-n1: #17140F;
+    --c-n2: #342E25;
+    --c-n3: #5A5143;
+    --c-n4: #B3A792;
+    --c-n5: #D9CFBE;
+    --c-n6: #F4EEE3;
+    --c-ok: #79C98F;
+    --c-warn: #E9B85A;
+    --c-warn-wash: #33270F;
+    --c-danger: #F08A80;
+    --c-danger-wash: #3A1A16;
+    --c-on-amber: #1E1A15;
+  }
+}
+:root[data-theme="dark"] {
+  --c-amber: #F2A45A;
+  --c-amber-strong: #F7BF84;
+  --c-amber-wash: #3A2512;
+  --c-ink: #6CCFC3;
+  --c-ink-wash: #12302D;
+  --c-n0: #211D17;
+  --c-n1: #17140F;
+  --c-n2: #342E25;
+  --c-n3: #5A5143;
+  --c-n4: #B3A792;
+  --c-n5: #D9CFBE;
+  --c-n6: #F4EEE3;
+  --c-ok: #79C98F;
+  --c-warn: #E9B85A;
+  --c-warn-wash: #33270F;
+  --c-danger: #F08A80;
+  --c-danger-wash: #3A1A16;
+  --c-on-amber: #1E1A15;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --t-fast: 0ms; --t-med: 0ms; --t-muster: 0ms; }
+}

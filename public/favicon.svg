@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Muster symbol">
+  <rect width="64" height="64" rx="15" fill="#A34A06"/>
+  <rect x="37" y="11" width="7" height="42" rx="3.5" fill="#FFFDF8"/>
+  <circle cx="25" cy="17.5" r="5.5" fill="#FFFDF8"/>
+  <circle cx="25" cy="32" r="5.5" fill="#FFFDF8"/>
+  <circle cx="25" cy="46.5" r="5.5" fill="#FFFDF8"/>
+</svg>
