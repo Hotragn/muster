@@ -8,6 +8,7 @@
 A medication-synchronization planner for the family member who does the pharmacy runs.</p>
 
 <p align="center">
+  <a href="https://hotragn.github.io/muster/app.html?example=1"><strong>Try it live</strong></a> ·
   <a href="#quick-start">Quick start</a> ·
   <a href="#how-it-works">How it works</a> ·
   <a href="docs/ARCHITECTURE.md">Architecture</a> ·
@@ -78,7 +79,7 @@ npm start       # http://localhost:4173
 | Planner with the example household (as in the demo) | http://localhost:4173/app.html?example=1&today=2026-10-26 |
 | Brand board | http://localhost:4173/brand.html |
 
-`public/` is a static site and can be deployed as-is to any static host (GitHub Pages, Netlify, S3).
+**Live demo:** https://hotragn.github.io/muster/ (planner with the example: https://hotragn.github.io/muster/app.html?example=1). It's deployed from `public/` by GitHub Actions (`.github/workflows/pages.yml`) after the unit, contrast and lint checks pass on Node 20. `public/` also works unchanged on any other static host.
 
 ## How it works
 

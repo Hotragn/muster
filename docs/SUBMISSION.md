@@ -71,4 +71,4 @@ Built with Claude Code (Anthropic). The AI wrote most of the code, design tokens
 
 ## Links
 - **Source code:** https://github.com/Hotragn/muster (public)
-- **Live demo (optional):** none yet. Any static host serving `public/` works (GitHub Pages: serve `public/`, open `app.html?example=1`).
+- **Live demo:** https://hotragn.github.io/muster/ (try the planner with the example household: https://hotragn.github.io/muster/app.html?example=1)

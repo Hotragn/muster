@@ -130,7 +130,7 @@ Key rules and why:
 
 ## Server (`server.mjs`)
 
-Node's `http` module and nothing else. It resolves `/app` → `app.html` (a page wins over a folder of the same name), serves `index.html` for directories, sends `Cache-Control: no-cache`, refuses paths outside `public/`, and serves `404.html` otherwise. All links in the pages use explicit `.html`, so `public/` also works unchanged on GitHub Pages, Netlify or any static host.
+Node's `http` module and nothing else. It resolves `/app` → `app.html` (a page wins over a folder of the same name), serves `index.html` for directories, sends `Cache-Control: no-cache`, refuses paths outside `public/`, and serves `404.html` otherwise. All links in the pages use explicit `.html` and relative paths, so `public/` works unchanged on any static host. Production: GitHub Pages at https://hotragn.github.io/muster/, deployed by `.github/workflows/pages.yml` only after `npm run check` passes on Node 20. The end-to-end script passes 48/48 against the live site (`BASE=https://hotragn.github.io/muster node scripts/golden-path.mjs 3`).
 
 ## Verification architecture
 

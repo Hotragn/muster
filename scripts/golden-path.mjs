@@ -56,7 +56,7 @@ const check = (name, ok, detail = '') => { checks.push({ name, ok, detail }); co
 
 for (let run = 1; run <= RUNS; run++) {
   console.log(`\n— run ${run} —`);
-  await go('/app?today=2026-10-26');
+  await go('/app.html?today=2026-10-26');
   await evaluate("localStorage.clear(); location.reload(); 1"); await sleep(700);
   check('empty state shows', await evaluate("!document.querySelector('#empty').hidden"));
   await evaluate("document.querySelector('#empty [data-action=example]').click(); 1"); await sleep(200);
@@ -83,7 +83,7 @@ for (let run = 1; run <= RUNS; run++) {
 }
 
 console.log('\n— edge cases —');
-await go('/app?today=2026-10-26');
+await go('/app.html?today=2026-10-26');
 await evaluate("localStorage.clear(); location.reload(); 1"); await sleep(700);
 await evaluate("document.querySelector('#empty [data-action=add]').click(); const f=document.querySelector('#editor-form'); f.elements.name.value=''; f.elements.perDay.value=''; f.elements.daysSupply.value='0'; f.requestSubmit(); 1"); await sleep(100);
 check('bad input shows field errors', (await evaluate("[...document.querySelectorAll('.err')].filter(e=>e.textContent).length")) >= 3);
@@ -91,14 +91,14 @@ await evaluate("const f=document.querySelector('#editor-form'); f.elements.name.
 check('one bottle: line-up disabled with explanation', await evaluate("document.querySelector('#lineup').disabled && /at least two bottles/.test(document.querySelector('#plan-msg').textContent)"));
 await evaluate("document.querySelector('[data-edit]').click(); document.querySelector('#f-delete').click(); 1"); await sleep(200);
 check('removing the last bottle returns to empty state', await evaluate("!document.querySelector('#empty').hidden"));
-await go('/app?today=2026-10-26&example=1');
+await go('/app.html?today=2026-10-26&example=1');
 await evaluate("for (const c of document.querySelectorAll('input[name=closed]')) { if (!c.checked) c.click(); } 1");
 await evaluate("document.querySelector('input[name=closed][value=\"0\"]').click(); document.querySelector('input[name=closed][value=\"0\"]').click(); 1"); await sleep(100);
 check('closed days still produce a plan', await evaluate("!document.querySelector('#lineup').disabled"));
 await send('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 2, mobile: true });
-await go('/app?today=2026-10-26&example=1&after=1');
+await go('/app.html?today=2026-10-26&example=1&after=1');
 check('no horizontal scroll at 375px (planner)', await evaluate("document.documentElement.scrollWidth <= innerWidth"), String(await evaluate('document.documentElement.scrollWidth')));
-await go('/');
+await go('/index.html');
 check('no horizontal scroll at 375px (landing)', await evaluate("document.documentElement.scrollWidth <= innerWidth"), String(await evaluate('document.documentElement.scrollWidth')));
 await go('/brand.html');
 check('no horizontal scroll at 375px (brand)', await evaluate("document.documentElement.scrollWidth <= innerWidth"), String(await evaluate('document.documentElement.scrollWidth')));
@@ -107,7 +107,7 @@ await go('/does-not-exist');
 check('404 page renders', /isn't on the shelf/.test(await evaluate('document.body.innerText')));
 const imgs = await evaluate("(async()=>{await new Promise(r=>setTimeout(r,300)); return [...document.images].filter(i=>!i.complete||!i.naturalWidth).length})()");
 check('404 page images load', imgs === 0);
-await go('/');
+await go('/index.html');
 await evaluate("window.scrollTo(0, document.body.scrollHeight); 1"); await sleep(800);
 const broken = await evaluate("(async()=>{for (const i of document.images) { i.loading='eager'; } await new Promise(r=>setTimeout(r,1500)); return [...document.images].filter(i=>!i.naturalWidth).map(i=>i.src)})()");
 check('landing images all load', broken.length === 0, broken.join(', '));
